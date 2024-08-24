@@ -14,7 +14,7 @@ class PenggunaSeeder extends Seeder
         DB::table('pengguna')->insert([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'), // password default
+            'password' => Hash::make('12345'), // password default
             'role' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -24,8 +24,8 @@ class PenggunaSeeder extends Seeder
         DB::table('pengguna')->insert([
             'name' => 'Pengguna',
             'email' => 'pengguna@example.com',
-            'password' => Hash::make('password'), // password default
-            'role' => 'pengguna',
+            'password' => Hash::make('12345'), // password default
+            'role' => 'mahasiswa',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
