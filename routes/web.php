@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\PenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +26,21 @@ Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('proses-login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin', [DashboardController::class, 'admin'])
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/', 'admin')->name('admin.dashboard');
+    });
+    Route::controller(PenggunaController::class)->group(function () {
+        Route::get('/profil', 'index')->name('tabel.profil');
+        Route::get('/update-profil', 'updateProfil')->name('form.update.profil');
+    });
+});
 
-Route::get('/mahasiswa', [DashboardController::class, 'mahasiswa'])
-    ->middleware(['auth', 'role:mahasiswa'])
-    ->name('mahasiswa.dashboard');
+Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/', 'mahasiswa')->name('mahasiswa.dashboard');
+    });
+});
 
 Route::controller(PageController::class)->group(function () {
     Route::get('dashboard-overview-2-page', 'dashboardOverview1')->name('dashboard-overview-1');

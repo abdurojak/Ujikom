@@ -6,7 +6,7 @@
         <a class="-intro-x hidden md:flex" href="">
             <img class="w-6" src="{{ Vite::asset('resources/images/logo.svg') }}"
                 alt="Icewall Tailwind Admin Dashboard Template" />
-            <span class="ml-3 text-lg text-white"> Icewall </span>
+            <span class="ml-3 text-lg text-white"> Pendaftaran Mahasiswa </span>
         </a>
         <!-- END: Logo -->
         <!-- BEGIN: Breadcrumb -->

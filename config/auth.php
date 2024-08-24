@@ -68,10 +68,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Pengguna::class, // Pastikan ini mengarah ke model Pengguna
         ],
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
