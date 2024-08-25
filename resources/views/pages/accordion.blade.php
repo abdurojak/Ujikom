@@ -1,7 +1,7 @@
 @extends('../themes/' . $activeTheme . '/' . $activeLayout)
 
 @section('subhead')
-    <title>Accordion - Midone - Tailwind Admin Dashboard Template</title>
+    <title>Aplikasi Pendaftaran Calon Mahasiswa</title>
 @endsection
 
 @section('subcontent')
@@ -21,20 +21,13 @@
                         <x-base.form-switch.label for="show-example-1">
                             Show example code
                         </x-base.form-switch.label>
-                        <x-base.form-switch.input
-                            class="ml-3 mr-0"
-                            id="show-example-1"
-                            type="checkbox"
-                        />
+                        <x-base.form-switch.input class="ml-3 mr-0" id="show-example-1" type="checkbox" />
                     </x-base.form-switch>
                 </div>
                 <div class="p-5">
                     <x-base.preview>
                         <x-base.disclosure.group>
-                            <x-base.disclosure
-                                id="faq-accordion-1"
-                                :index="0"
-                            >
+                            <x-base.disclosure id="faq-accordion-1" :index="0">
                                 <x-base.disclosure.button>
                                     OpenSSL Essentials: Working with SSL Certificates,
                                     Private Keys
@@ -50,10 +43,7 @@
                                     unchanged.
                                 </x-base.disclosure.panel>
                             </x-base.disclosure>
-                            <x-base.disclosure
-                                id="faq-accordion-2"
-                                :index="1"
-                            >
+                            <x-base.disclosure id="faq-accordion-2" :index="1">
                                 <x-base.disclosure.button>
                                     Understanding IP Addresses, Subnets, and CIDR Notation
                                 </x-base.disclosure.button>
@@ -68,10 +58,7 @@
                                     unchanged.
                                 </x-base.disclosure.panel>
                             </x-base.disclosure>
-                            <x-base.disclosure
-                                id="faq-accordion-3"
-                                :index="2"
-                            >
+                            <x-base.disclosure id="faq-accordion-3" :index="2">
                                 <x-base.disclosure.button>
                                     How To Troubleshoot Common HTTP Error Codes
                                 </x-base.disclosure.button>
@@ -86,10 +73,7 @@
                                     unchanged.
                                 </x-base.disclosure.panel>
                             </x-base.disclosure>
-                            <x-base.disclosure
-                                id="faq-accordion-4"
-                                :index="3"
-                            >
+                            <x-base.disclosure id="faq-accordion-4" :index="3">
                                 <x-base.disclosure.button>
                                     An Introduction to Securing your Linux VPS
                                 </x-base.disclosure.button>
@@ -109,10 +93,7 @@
                     <x-base.source>
                         <x-base.highlight>
                             <x-base.disclosure.group>
-                                <x-base.disclosure
-                                    id="faq-accordion-1"
-                                    :index="0"
-                                >
+                                <x-base.disclosure id="faq-accordion-1" :index="0">
                                     <x-base.disclosure.button>
                                         OpenSSL Essentials: Working with SSL Certificates,
                                         Private Keys
@@ -128,10 +109,7 @@
                                         unchanged.
                                     </x-base.disclosure.panel>
                                 </x-base.disclosure>
-                                <x-base.disclosure
-                                    id="faq-accordion-2"
-                                    :index="1"
-                                >
+                                <x-base.disclosure id="faq-accordion-2" :index="1">
                                     <x-base.disclosure.button>
                                         Understanding IP Addresses, Subnets, and CIDR Notation
                                     </x-base.disclosure.button>
@@ -146,10 +124,7 @@
                                         unchanged.
                                     </x-base.disclosure.panel>
                                 </x-base.disclosure>
-                                <x-base.disclosure
-                                    id="faq-accordion-3"
-                                    :index="2"
-                                >
+                                <x-base.disclosure id="faq-accordion-3" :index="2">
                                     <x-base.disclosure.button>
                                         How To Troubleshoot Common HTTP Error Codes
                                     </x-base.disclosure.button>
@@ -164,10 +139,7 @@
                                         unchanged.
                                     </x-base.disclosure.panel>
                                 </x-base.disclosure>
-                                <x-base.disclosure
-                                    id="faq-accordion-4"
-                                    :index="3"
-                                >
+                                <x-base.disclosure id="faq-accordion-4" :index="3">
                                     <x-base.disclosure.button>
                                         An Introduction to Securing your Linux VPS
                                     </x-base.disclosure.button>
@@ -199,20 +171,13 @@
                         <x-base.form-switch.label for="show-example-2">
                             Show example code
                         </x-base.form-switch.label>
-                        <x-base.form-switch.input
-                            class="ml-3 mr-0"
-                            id="show-example-2"
-                            type="checkbox"
-                        />
+                        <x-base.form-switch.input class="ml-3 mr-0" id="show-example-2" type="checkbox" />
                     </x-base.form-switch>
                 </div>
                 <div class="p-5">
                     <x-base.preview>
                         <x-base.disclosure.group variant="boxed">
-                            <x-base.disclosure
-                                id="faq-accordion-5"
-                                :index="0"
-                            >
+                            <x-base.disclosure id="faq-accordion-5" :index="0">
                                 <x-base.disclosure.button>
                                     OpenSSL Essentials: Working with SSL Certificates,
                                     Private Keys
@@ -228,10 +193,7 @@
                                     unchanged.
                                 </x-base.disclosure.panel>
                             </x-base.disclosure>
-                            <x-base.disclosure
-                                id="faq-accordion-6"
-                                :index="1"
-                            >
+                            <x-base.disclosure id="faq-accordion-6" :index="1">
                                 <x-base.disclosure.button>
                                     Understanding IP Addresses, Subnets, and CIDR Notation
                                 </x-base.disclosure.button>
@@ -246,10 +208,7 @@
                                     unchanged.
                                 </x-base.disclosure.panel>
                             </x-base.disclosure>
-                            <x-base.disclosure
-                                id="faq-accordion-7"
-                                :index="2"
-                            >
+                            <x-base.disclosure id="faq-accordion-7" :index="2">
                                 <x-base.disclosure.button>
                                     How To Troubleshoot Common HTTP Error Codes
                                 </x-base.disclosure.button>
@@ -264,10 +223,7 @@
                                     unchanged.
                                 </x-base.disclosure.panel>
                             </x-base.disclosure>
-                            <x-base.disclosure
-                                id="faq-accordion-8"
-                                :index="3"
-                            >
+                            <x-base.disclosure id="faq-accordion-8" :index="3">
                                 <x-base.disclosure.button>
                                     An Introduction to Securing your Linux VPS
                                 </x-base.disclosure.button>
@@ -287,10 +243,7 @@
                     <x-base.source>
                         <x-base.highlight>
                             <x-base.disclosure.group variant="boxed">
-                                <x-base.disclosure
-                                    id="faq-accordion-5"
-                                    :index="0"
-                                >
+                                <x-base.disclosure id="faq-accordion-5" :index="0">
                                     <x-base.disclosure.button>
                                         OpenSSL Essentials: Working with SSL Certificates,
                                         Private Keys
@@ -306,10 +259,7 @@
                                         unchanged.
                                     </x-base.disclosure.panel>
                                 </x-base.disclosure>
-                                <x-base.disclosure
-                                    id="faq-accordion-6"
-                                    :index="1"
-                                >
+                                <x-base.disclosure id="faq-accordion-6" :index="1">
                                     <x-base.disclosure.button>
                                         Understanding IP Addresses, Subnets, and CIDR Notation
                                     </x-base.disclosure.button>
@@ -324,10 +274,7 @@
                                         unchanged.
                                     </x-base.disclosure.panel>
                                 </x-base.disclosure>
-                                <x-base.disclosure
-                                    id="faq-accordion-7"
-                                    :index="2"
-                                >
+                                <x-base.disclosure id="faq-accordion-7" :index="2">
                                     <x-base.disclosure.button>
                                         How To Troubleshoot Common HTTP Error Codes
                                     </x-base.disclosure.button>
@@ -342,10 +289,7 @@
                                         unchanged.
                                     </x-base.disclosure.panel>
                                 </x-base.disclosure>
-                                <x-base.disclosure
-                                    id="faq-accordion-8"
-                                    :index="3"
-                                >
+                                <x-base.disclosure id="faq-accordion-8" :index="3">
                                     <x-base.disclosure.button>
                                         An Introduction to Securing your Linux VPS
                                     </x-base.disclosure.button>

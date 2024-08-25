@@ -1,7 +1,7 @@
 @extends('../themes/' . $activeTheme . '/' . $activeLayout)
 
 @section('subhead')
-    <title>Accordion - Midone - Tailwind Admin Dashboard Template</title>
+    <title>Aplikasi Pendaftaran Calon Mahasiswa</title>
 @endsection
 
 @section('subcontent')

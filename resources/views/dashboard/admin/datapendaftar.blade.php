@@ -6,17 +6,16 @@
 
 @section('subcontent')
     <div class="m-5">
-        <div class="grid">
-            <h1 class="text-xl font-semibold mb-5">Data Pendaftar</h1>
-            <x-base.button variant="primary" class="ml-auto"><x-base.lucide class="h-4 w-4" icon="plus" />Tambah
-                Data</x-base.button>
-        </div>
+        <h1 class="text-xl font-semibold mb-5">Data Pendaftar</h1>
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Email</th>
-                    <th>Nomor Hp</th>
+                    <th>Kewarnegaraan</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status Menikah</th>
+                    <th>Agama</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,16 +23,19 @@
                 @foreach ($users as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->nohp }}</td>
+                        <td>{{ $user->kewarnegaraan }}</td>
+                        <td>{{ $user->tgl_lahir }}</td>
+                        <td>{{ $user->jk }}</td>
+                        <td>{{ $user->menikah }}</td>
+                        <td>{{ $user->agama }}</td>
                         <td>
                             <div>
-                                <x-base.button class="bg-red-800 text-white" as="a"
-                                    href="{{ route('hapus.akun.data', ['id' => $user->id]) }}"> <x-base.lucide
-                                        class="h-4 w-4" icon="eraser" /></x-base.button>
+                                <x-base.button class="bg-lime-800 text-white" as="a"
+                                    href="{{ route('pendaftar.data', ['id' => $user->id]) }}"> <x-base.lucide class="h-4 w-4"
+                                        icon="eye" /></x-base.button>
                                 <x-base.button variant="primary" as="a"
-                                    href="{{ route('edit.akun.data', ['id' => $user->id]) }}"> <x-base.lucide
-                                        class="h-4 w-4" icon="pencil" /></x-base.button>
+                                    href="{{ route('edit.data', ['id' => $user->id]) }}"> <x-base.lucide class="h-4 w-4"
+                                        icon="pencil" /></x-base.button>
                             </div>
                         </td>
                     </tr>
@@ -42,8 +44,11 @@
             <tfoot>
                 <tr>
                     <th>Nama</th>
-                    <th>Email</th>
-                    <th>Nomor Hp</th>
+                    <th>Kewarnegaraan</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status Menikah</th>
+                    <th>Agama</th>
                     <th>Action</th>
                 </tr>
             </tfoot>

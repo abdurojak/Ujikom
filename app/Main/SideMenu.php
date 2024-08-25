@@ -16,21 +16,21 @@ class SideMenu
             if ($user->role == 'admin') {
                 $menu = [
                     'dashboard' => [
-                        'icon' => 'hard-drive',
-                        'title' => 'Dashboard',
+                        'icon' => 'clipboard-list',
+                        'title' => 'Data Pendaftaran',
                         'route_name' => 'admin.dashboard',
                     ],
                     'profil' => [
                         'icon' => 'user',
-                        'title' => 'Pengguna',
+                        'title' => 'Data Pengguna',
                         'route_name' => 'tabel.profil',
                     ]
                 ];
             } else {
                 $menu = [
-                    'widgets' => [
-                        'icon' => 'hard-drive',
-                        'title' => 'Dashboard',
+                    'daftar' => [
+                        'icon' => 'clipboard-list',
+                        'title' => 'Pendaftaran',
                         'route_name' => 'mahasiswa.dashboard',
                     ]
                 ];
