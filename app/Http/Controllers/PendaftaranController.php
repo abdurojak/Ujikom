@@ -15,11 +15,13 @@ class PendaftaranController extends Controller
         if ($filefoto) {
             $filefotoPath = $filefoto->store('public');
             $filefotohashed = str_replace('public/', 'storage/', $filefotoPath);
-        } else {
-            $filefotohashed = auth()->user()->file_img;
         }
 
-        $tbldaftar = Pengguna::findOrFail(auth()->user()->id);
+        $userId = auth()->user()->id;
+        if ($request->id != '') {
+            $userId = $request->id;
+        }
+        $tbldaftar = Pengguna::findOrFail($userId);
         $tbldaftar->name = $request->name;
         $tbldaftar->email = $request->email;
         $tbldaftar->alamat_ktp = $request->alamat_ktp;
@@ -39,10 +41,15 @@ class PendaftaranController extends Controller
         $tbldaftar->jk = $request->jk;
         $tbldaftar->menikah = $request->menikah;
         $tbldaftar->id_agama = $request->id_agama;
-        $tbldaftar->file_img = $filefotohashed;
+        if ($filefoto) {
+            $tbldaftar->file_img = $filefotohashed;
+        }
         $tbldaftar->uid = $uid;
         $tbldaftar->status_user = 'terdaftar';
         $tbldaftar->save();
+        if (auth()->user()->role == 'admin') {
+            return redirect()->route('admin.dashboard')->with('success', 'Edit Berhasil');
+        }
         return redirect()->route('mahasiswa.status')->with('success', 'Pendaftaran Berhasil');
     }
 }

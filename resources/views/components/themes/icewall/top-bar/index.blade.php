@@ -41,8 +41,7 @@
                 </x-base.menu.header>
                 <x-base.menu.divider class="bg-white/[0.08]" />
                 <x-base.menu.item class="hover:bg-white/5" data-tw-merge data-tw-toggle="modal"
-                    data-tw-target="#logout-modal-preview" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    data-tw-target="#logout-modal-preview">
                     <x-base.lucide class="mr-2 h-4 w-4" icon="ToggleRight" />
                     Logout
                 </x-base.menu.item>

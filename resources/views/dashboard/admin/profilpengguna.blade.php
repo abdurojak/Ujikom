@@ -29,9 +29,9 @@
                         <td>{{ $user->nohp }}</td>
                         <td>
                             <div>
-                                <x-base.button class="bg-red-800 text-white" as="a"
-                                    href="{{ route('hapus.akun.data', ['id' => $user->id]) }}"> <x-base.lucide
-                                        class="h-4 w-4" icon="eraser" /></x-base.button>
+                                <x-base.button class="bg-red-800 text-white" rounded data-tw-toggle="modal"
+                                    data-tw-target="#delete-akun"> <x-base.lucide class="h-4 w-4"
+                                        icon="eraser" /></x-base.button>
                                 <x-base.button variant="primary" as="a"
                                     href="{{ route('edit.akun.data', ['id' => $user->id]) }}"> <x-base.lucide
                                         class="h-4 w-4" icon="pencil" /></x-base.button>
@@ -50,6 +50,27 @@
             </tfoot>
         </table>
     </div>
+    <x-base.dialog id="delete-akun">
+        <x-base.dialog.panel>
+            <div class="p-5 text-center">
+                <x-base.lucide class="mx-auto mt-3 h-16 w-16 text-primary" icon="helpCircle" />
+                <div class="mt-5 text-3xl">Anda yakin?</div>
+                <div class="mt-2 text-slate-500">
+                    Untuk menghapus akun ini? <br />
+                    Akun akan terhapus secara permanen.
+                </div>
+            </div>
+            <div class="px-5 pb-8 text-center ">
+                <x-base.button class="mr-12 w-24" data-tw-dismiss="modal" type="button" variant="outline-secondary">
+                    Batal
+                </x-base.button>
+                <x-base.button class="w-24" type="button" variant="primary" as="a"
+                    href="{{ route('hapus.akun.data', ['id' => $user->id]) }}">
+                    Lanjut
+                </x-base.button>
+            </div>
+        </x-base.dialog.panel>
+    </x-base.dialog>
     <script>
         $('#example').DataTable({
             dom: 'Bfrtip',

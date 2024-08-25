@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PenggunaController extends Controller
 {
@@ -55,13 +56,14 @@ class PenggunaController extends Controller
         $user = new Pengguna();
         if ($request->id != '') {
             $user =
-                Pengguna::findOrFail(auth()->user()->id);
+                Pengguna::findOrFail($request->id);
         }
         $user->name = $request->name;
         $user->email = $request->email;
         $user->nohp = $request->nohp;
         if ($request->password != null) {
-            $user->password = $request->password;
+            $hashedPassword = Hash::make($request->password);
+            $user->password = $hashedPassword;
         }
         $user->save();
         return redirect()->route('tabel.profil')->with('success', 'Berhasil Simpan Data');

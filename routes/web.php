@@ -40,6 +40,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/save-akun', 'saveAkun')->name('save.akun');
         Route::get('/hapus-akun/{id}', 'hapusAkun')->name('hapus.akun.data');
     });
+    Route::controller(PendaftaranController::class)->group(function () {
+        Route::post('/edit-mhsw', 'pendaftaran')->name('edit-mhsw');
+    });
 });
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {

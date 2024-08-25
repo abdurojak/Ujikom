@@ -28,6 +28,7 @@ class DashboardController extends Controller
                 'kabupaten_lahir.nama_kabupaten_kota as kabupaten_lahir_nama',
                 'provinsi_lahir.nama_provinsi as provinsi_lahir_nama'
             ]);
+
         return view('dashboard.admin.datapendaftar', compact('users')); // Halaman untuk admin
     }
 
@@ -111,7 +112,9 @@ class DashboardController extends Controller
 
     public function statusdaftar()
     {
-        $user = Pengguna::leftJoin('agama', 'pengguna.id_agama', '=', 'agama.id')
+
+        $user =
+            Pengguna::leftJoin('agama', 'pengguna.id_agama', '=', 'agama.id')
             ->leftJoin('provinsi as provinsi_asal', 'pengguna.id_provinsi', '=', 'provinsi_asal.id')
             ->leftJoin('kabupaten_kota as kabupaten_asal', 'pengguna.id_kotkab', '=', 'kabupaten_asal.id')
             ->leftJoin('kabupaten_kota as kabupaten_lahir', 'pengguna.id_kotkab_lahir', '=', 'kabupaten_lahir.id')

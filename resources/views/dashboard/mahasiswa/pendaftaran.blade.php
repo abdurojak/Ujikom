@@ -13,290 +13,301 @@
             @endphp
         @endisset
         <div class="col-span-12">
-            <form method="POST" action="{{ route('pendaftaran') }}" enctype="multipart/form-data">
-                @csrf
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+            @if (auth()->user()->role == 'mahasiswa')
+                <form method="POST" action="{{ route('pendaftaran') }}" enctype="multipart/form-data">
+                @else
+                    <form method="POST" action="{{ route('edit-mhsw') }}" enctype="multipart/form-data">
+            @endif
+            @csrf
+
+            <input type="hidden" name="id" value="{{ $user->id ?? '' }}" />
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-4">
+                    <span class="font-semibold">1. Nama Lengkap</span><br>
+                    <span class="text-gray-500">
+                        (sesuai ijasah disertai gelar)
+                    </span>
+                </div>
+                <div class="col-span-8">
+                    <x-base.form-input class="!box w-full pr-10" type="text" required
+                        placeholder="Nama Lengkap Calon Mahasiswa" name="name" value="{{ $user->name }}" />
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
                     <div class="col-span-4">
-                        <span class="font-semibold">1. Nama Lengkap</span><br>
+                        <span class="font-semibold">2. Alamat KTP</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-textarea class="!box w-full pr-10" type="text" placeholder="Alamat Sesuai KTP"
+                            required name="alamat_ktp">{{ $user->alamat_ktp }}
+                        </x-base.form-textarea>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Alamat Saat Ini</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-textarea class="!box w-full pr-10" type="text" placeholder="Alamat Saat Ini"
+                            required name="alamat_domisili">
+                            {{ $user->alamat_domisili }}
+                        </x-base.form-textarea>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Provinsi</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-select class="w-full" id="provinsi" name="provinsi" required>
+                            <option value="">-- Pilih Provinsi --</option>
+                            @foreach ($provinsi as $provinsi_tinggal)
+                                <option value="{{ $provinsi_tinggal->id }}">{{ $provinsi_tinggal->nama_provinsi }}
+                                </option>
+                            @endforeach
+                        </x-base.form-select>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Kabupaten / Kota</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-select class="w-full" id="kabupaten_kota" name="kabupaten_kota" required>
+                            <option value="">-- Pilih Kabupaten/Kota --</option>
+                        </x-base.form-select>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Kecamatan</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Kecamatan" required
+                            name="kecamatan" value="{{ $user->kecamatan }}" />
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Nomor Telepon</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-input class="!box w-full pr-10" type="number" placeholder="Nomor Telepon" required
+                            name="notelp" value="{{ $user->notelp }}" />
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Nomor HP</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-input class="!box w-full pr-10" type="number" placeholder="Nomor HP" required
+                            name="nohp" value="{{ $user->nohp }}" />
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Email</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-input class="!box w-full pr-10" type="email" placeholder="Email" name="email"
+                            required value="{{ $user->email }}" />
+                    </div>
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">3. Kewarnegaraan</span>
+                    </div>
+                    <div class="col-span-8">
+                        <input id="wni-radio" type="radio" value="WNI" name="kewarnegaraan"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wni-radio"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">WNI</label>
+
+                        <input id="wni-ket-radio" type="radio" value="WNI-Keturunan" name="kewarnegaraan"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wni-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">WNI
+                            Keturunan</label>
+
+                        <input id="wna-radio" type="radio" value="WNA" name="kewarnegaraan"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wna-radio"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">WNA</label>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Negara</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-input id="negara-input" class="!box w-full pr-10" type="text"
+                            placeholder="Masukan Negara Asal" name="kewarnegaraan_negara"
+                            value="{{ $user->kewarnegaraan_negara }}" />
+                    </div>
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">4. Tanggal Lahir</span>
                         <span class="text-gray-500">
-                            (sesuai ijasah disertai gelar)
+                            (sesuai ijasah)
                         </span>
                     </div>
                     <div class="col-span-8">
-                        <x-base.form-input class="!box w-full pr-10" type="text"
-                            placeholder="Nama Lengkap Calon Mahasiswa" name="name" value="{{ $user->name }}" />
+                        <x-base.litepicker class="mx-auto block w-full" data-single-mode="true" name="tgl_lahir"
+                            value="{{ $user->tgl_lahir }}" required />
                     </div>
                 </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">2. Alamat KTP</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-textarea class="!box w-full pr-10" type="text" placeholder="Alamat Sesuai KTP"
-                                name="alamat_ktp">{{ $user->alamat_ktp }}
-                            </x-base.form-textarea>
-                        </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">5. Tempat Lahir</span>
+                        <span class="text-gray-500">
+                            (sesuai ijasah)
+                        </span>
                     </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Alamat Saat Ini</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-textarea class="!box w-full pr-10" type="text" placeholder="Alamat Saat Ini"
-                                name="alamat_domisili">
-                                {{ $user->alamat_domisili }}
-                            </x-base.form-textarea>
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Provinsi</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-select class="w-full" id="provinsi" name="provinsi">
-                                <option value="">-- Pilih Provinsi --</option>
-                                @foreach ($provinsi as $provinsi_tinggal)
-                                    <option value="{{ $provinsi_tinggal->id }}">{{ $provinsi_tinggal->nama_provinsi }}
-                                    </option>
-                                @endforeach
-                            </x-base.form-select>
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Kabupaten / Kota</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-select class="w-full" id="kabupaten_kota" name="kabupaten_kota">
-                                <option value="">-- Pilih Kabupaten/Kota --</option>
-                            </x-base.form-select>
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Kecamatan</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Kecamatan"
-                                name="kecamatan" value="{{ $user->kecamatan }}" />
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Nomor Telepon</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Nomor Telepon"
-                                name="notelp" value="{{ $user->notelp }}" />
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Nomor HP</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Nomor HP"
-                                name="nohp" value="{{ $user->nohp }}" />
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Email</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Email" name="email"
-                                value="{{ $user->email }}" />
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">3. Kewarnegaraan</span>
-                        </div>
-                        <div class="col-span-8">
-                            <input id="wni-radio" type="radio" value="WNI" name="kewarnegaraan"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wni-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">WNI</label>
+                    <div class="col-span-8">
+                        <input id="dn-radio" type="radio" value="Dalam Negeri" name="tempat_lahir"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wni-radio" required
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Dalam Negeri</label>
 
-                            <input id="wna-radio" type="radio" value="WNA" name="kewarnegaraan"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wna-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">WNA</label>
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Negara</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-input id="negara-input" class="!box w-full pr-10" type="text"
-                                placeholder="Masukan Negara Asal" name="kewarnegaraan_negara"
-                                value="{{ $user->kewarnegaraan_negara }}" />
-                        </div>
+                        <input id="ln-radio" type="radio" value="Luar Negeri" name="tempat_lahir"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wna-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Luar
+                            Negeri</label>
                     </div>
                 </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">4. Tanggal Lahir</span>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Provinsi</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-select class="w-full" id="provinsi_lahir" name="id_provinsi_lahir">
+                            <option value="">-- Pilih Provinsi --</option>
+                            @foreach ($provinsi as $provinsi_lahir)
+                                <option value="{{ $provinsi_lahir->id }}">{{ $provinsi_lahir->nama_provinsi }}
+                                </option>
+                            @endforeach
+                        </x-base.form-select>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Kabupaten / Kota</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-select class="w-full" id="kabupaten_kota_lahir" name="id_kotkab_lahir">
+                            <option value="">-- Pilih Kabupaten/Kota --</option>
+                        </x-base.form-select>
+                    </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4 pl-4">
+                        <span>Negara</span>
+                    </div>
+                    <div class="col-span-8">
+                        <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Negara" required
+                            id="negara_lahir" name="negara" value="{{ $user->negara }}" />
+                    </div>
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">6. Jenis Kelamin</span>
+                    </div>
+                    <div class="col-span-8">
+                        <input id="pria" type="radio" value="pria" name="jk" required
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wni-radio"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Pria</label>
+
+                        <input id="wanita" type="radio" value="wanita" name="jk" required
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wna-radio"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Wanita</label>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">7. Status Menikah</span>
+                    </div>
+                    <div class="col-span-8">
+                        <input id="belum-menikah" type="radio" value="belum" name="menikah"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wni-radio" required
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Belum
+                            Menikah</label>
+                        <input id="menikah" type="radio" value="menikah" name="menikah" required
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wna-radio"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Menikah</label>
+
+                        <input id="janda-duda" type="radio" value="lainnya" name="menikah" required
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="wna-radio" required
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lain-lain
                             <span class="text-gray-500">
-                                (sesuai ijasah)
+                                (janda/duda)
                             </span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.litepicker class="mx-auto block w-full" data-single-mode="true" name="tgl_lahir"
-                                value="{{ $user->tgl_lahir }}" />
-                        </div>
+                        </label>
                     </div>
                 </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">5. Tempat Lahir</span>
-                            <span class="text-gray-500">
-                                (sesuai ijasah)
-                            </span>
-                        </div>
-                        <div class="col-span-8">
-                            <input id="dn-radio" type="radio" value="Dalam Negeri" name="tempat_lahir"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wni-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Dalam Negeri</label>
-
-                            <input id="ln-radio" type="radio" value="Luar Negeri" name="tempat_lahir"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wna-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Luar
-                                Negeri</label>
-                        </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">8. Agama</span>
                     </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Provinsi</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-select class="w-full" id="provinsi_lahir" name="id_provinsi_lahir">
-                                <option value="">-- Pilih Provinsi --</option>
-                                @foreach ($provinsi as $provinsi_lahir)
-                                    <option value="{{ $provinsi_lahir->id }}">{{ $provinsi_lahir->nama_provinsi }}
-                                    </option>
-                                @endforeach
-                            </x-base.form-select>
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pl-4">
-                            <span>Kabupaten / Kota</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-select class="w-full" id="kabupaten_kota_lahir" name="id_kotkab_lahir">
-                                <option value="">-- Pilih Kabupaten/Kota --</option>
-                            </x-base.form-select>
-                        </div>
-                    </div>
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4 pr-4">
-                            <span>Negara</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-input class="!box w-full pr-10" type="text" placeholder="Negara"
-                                id="negara_lahir" name="negara" value="{{ $user->negara }}" />
-                        </div>
+                    <div class="col-span-8">
+                        <x-base.form-select class="w-full" id="agama" name="id_agama" required>
+                            <option value="">-- Pilih Agama --</option>
+                            @foreach ($agama as $agama)
+                                <option value="{{ $agama->id }}">{{ $agama->agama }}
+                                </option>
+                            @endforeach
+                        </x-base.form-select>
                     </div>
                 </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">6. Jenis Kelamin</span>
-                        </div>
-                        <div class="col-span-8">
-                            <input id="pria" type="radio" value="pria" name="jk"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wni-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Pria</label>
-
-                            <input id="wanita" type="radio" value="wanita" name="jk"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wna-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Wanita</label>
-                        </div>
+            </div>
+            <div
+                class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="col-span-12 grid grid-cols-12 items-center mb-1">
+                    <div class="col-span-4">
+                        <span class="font-semibold">Foto Ukuran 3x4</span>
+                    </div>
+                    <div class="col-span-8">
+                        <input
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            aria-describedby="file_input_help" id="file_input" type="file" name="file_img">
                     </div>
                 </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">7. Status Menikah</span>
-                        </div>
-                        <div class="col-span-8">
-                            <input id="belum-menikah" type="radio" value="belum" name="menikah"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wni-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Belum
-                                Menikah</label>
-                            <input id="menikah" type="radio" value="menikah" name="menikah"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wna-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">Menikah</label>
-
-                            <input id="janda-duda" type="radio" value="lainnya" name="menikah"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="wna-radio"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lain-lain
-                                <span class="text-gray-500">
-                                    (janda/duda)
-                                </span>
-                            </label>
-                        </div>
-                    </div>
+            </div>
+            <div class="flex flex-cols-12 justify-end max-w my-3 mx-1 w-full p-4 md:p-6">
+                <div class="grid grid-col-4 mx-1">
+                    <x-base.button class="mb-2 mr-1 px-10 w-50" variant="primary" rounded data-tw-toggle="modal"
+                        type="submit">
+                        <x-base.lucide class="mr-2 h-4 w-4" icon="save" />
+                        Simpan
+                    </x-base.button>
                 </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">8. Agama</span>
-                        </div>
-                        <div class="col-span-8">
-                            <x-base.form-select class="w-full" id="agama" name="id_agama">
-                                <option value="">-- Pilih Agama --</option>
-                                @foreach ($agama as $agama)
-                                    <option value="{{ $agama->id }}">{{ $agama->agama }}
-                                    </option>
-                                @endforeach
-                            </x-base.form-select>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="grid grid-cols-12 max-w my-3 w-full relative  bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="col-span-12 grid grid-cols-12 items-center mb-1">
-                        <div class="col-span-4">
-                            <span class="font-semibold">Foto Ukuran 3x4</span>
-                        </div>
-                        <div class="col-span-8">
-                            <input
-                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                aria-describedby="file_input_help" id="file_input" type="file" name="file_img">
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-cols-12 justify-end max-w my-3 mx-1 w-full p-4 md:p-6">
-                    <div class="grid grid-col-4 mx-1">
-                        <x-base.button class="mb-2 mr-1 px-10 w-50" variant="primary" rounded data-tw-toggle="modal"
-                            type="submit">
-                            <x-base.lucide class="mr-2 h-4 w-4" icon="save" />
-                            Simpan
-                        </x-base.button>
-                    </div>
-                </div>
+            </div>
             </form>
         </div>
     </div>
@@ -306,7 +317,7 @@
             console.log(provinsiID, 'provinsiID')
             if (provinsiID) {
                 jQuery.ajax({
-                    url: 'get-kabkot/' + provinsiID, // Pastikan URL ini benar
+                    url: 'http://localhost:8000/get-kabkot/' + provinsiID, // Pastikan URL ini benar
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
@@ -347,7 +358,7 @@
             console.log(provinsiID, 'provinsiID')
             if (provinsiID) {
                 jQuery.ajax({
-                    url: 'get-kabkot/' + provinsiID, // Pastikan URL ini benar
+                    url: 'http://localhost:8000/get-kabkot/' + provinsiID, // Pastikan URL ini benar
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
@@ -397,6 +408,7 @@
         // JavaScript to handle the change event
         document.addEventListener('DOMContentLoaded', function() {
             const wniRadio = document.getElementById('wni-radio');
+            const wniketRadio = document.getElementById('wni-ket-radio');
             const wnaRadio = document.getElementById('wna-radio');
             const negaraInput = document.getElementById('negara-input');
             const dnRadio = document.getElementById('dn-radio');
@@ -415,7 +427,13 @@
             wniRadio.addEventListener('change', function() {
                 if (this.checked) {
                     negaraInput.value = 'Indonesia'; // Set country to Indonesia
-                    negaraInput.disabled = true; // Disable the input field
+                }
+            });
+
+            // When WNI Ket is selected
+            wniketRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    negaraInput.value = 'Indonesia'; // Set country to Indonesia
                 }
             });
 
@@ -423,7 +441,6 @@
             wnaRadio.addEventListener('change', function() {
                 if (this.checked) {
                     negaraInput.value = ''; // Clear country when WNA is selected
-                    negaraInput.disabled = false; // Enable the input field
                 }
             });
 
@@ -431,7 +448,6 @@
             dnRadio.addEventListener('change', function() {
                 if (this.checked) {
                     negara_lahir.value = 'Indonesia'; // Set country to Indonesia
-                    negara_lahir.disabled = true; // Disable the input field
                     kabkot.disabled = false;
                     provinsi.disabled = false;
                 }
@@ -441,7 +457,6 @@
             lnRadio.addEventListener('change', function() {
                 if (this.checked) {
                     negara_lahir.value = ''; // Clear country when WNA is selected
-                    negara_lahir.disabled = false; // Enable the input field
                     kabkot.disabled = true;
                     provinsi.disabled = true;
                     kabkot.value = "";
@@ -449,10 +464,12 @@
                 }
             });
 
-            if ('{{ $user->kewarnegaraan }}' == 'WNA') {
+            if ('{{ $user->kewarnegaraan }}' == 'WNI') {
+                wniRadio.checked = true
+            } else if ('{{ $user->kewarnegaraan }}' == 'WNA') {
                 wnaRadio.checked = true
             } else {
-                wniRadio.checked = true
+                wniketRadio.checked = true
             }
 
             if ('{{ $user->tempat_lahir }}' == 'Dalam Negeri') {
