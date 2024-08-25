@@ -7,9 +7,10 @@
 @section('subcontent')
     <div class="m-5">
         <div class="grid">
-            <h1 class="text-xl font-semibold mb-5">Data Pendaftar</h1>
-            <x-base.button variant="primary" class="ml-auto"><x-base.lucide class="h-4 w-4" icon="plus" />Tambah
-                Data</x-base.button>
+            <h1 class="text-xl font-semibold mb-5">Data Akun</h1>
+            <x-base.button variant="primary" class="ml-auto" as="a"
+                href="{{ route('tambah.akun.data') }}"><x-base.lucide class="h-4 w-4" icon="plus" /> Tambah
+                Akun</x-base.button>
         </div>
         <table id="example" class="display" style="width:100%">
             <thead>
@@ -55,7 +56,10 @@
             buttons: [{
                 extend: 'excelHtml5',
                 text: 'Export Excel',
-                className: 'bg-green-500 text-white rounded px-4 py-2 mb-5' // Menggunakan kelas Tailwind
+                className: 'bg-green-500 text-white rounded px-4 py-2 mb-5', // Menggunakan kelas Tailwind
+                exportOptions: {
+                    columns: ':not(:last-child)' // Mengecualikan kolom terakhir (misalnya kolom "action")
+                }
             }],
             initComplete: function(settings, json) {
                 $('.dataTables_filter input').addClass(

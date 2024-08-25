@@ -37,6 +37,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/profil', 'index')->name('tabel.profil');
         Route::get('/form-tambah-akun', 'tambahAkun')->name('tambah.akun.data');
         Route::get('/form-edit-akun/{id}', 'updateProfil')->name('edit.akun.data');
+        Route::post('/save-akun', 'saveAkun')->name('save.akun');
         Route::get('/hapus-akun/{id}', 'hapusAkun')->name('hapus.akun.data');
     });
 });

@@ -17,70 +17,70 @@
                 <div class="col-span-6 font-medium">
                     Nama
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->name }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Alamat KTP
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->alamat_ktp }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Alamat Saat Ini
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->alamat_domisili }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Kecamatan
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->kecamatan }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Kabupaten
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->kabupaten_asal_nama }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Provinsi
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->provinsi_lahir_nama }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Nomor Telepon
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->notelp }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Nomor HP
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->nohp }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Email
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->email }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Kewarnegaraan
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->kewarnegaraan }}
                 </div>
 
@@ -88,7 +88,7 @@
                     <div class="col-span-6 font-medium">
                         Negara Kewarnegaraan
                     </div>
-                    <div class="col-span-6 truncate">
+                    <div class="col-span-6">
                         {{ $user->kewarnegaraan_negara }}
                     </div>
                 @endif
@@ -96,56 +96,56 @@
                 <div class="col-span-6 font-medium">
                     Tanggal Lahir
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->tgl_lahir }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Tempat Lahir
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->tempat_lahir }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Kabupaten / Kota Lahir
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->kabupaten_lahir_nama }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Provinsi
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->provinsi_lahir_nama }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Negara
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->negara }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Jenis Kelamin
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->jk }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Status menikah
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->menikah }}
                 </div>
 
                 <div class="col-span-6 font-medium">
                     Agama
                 </div>
-                <div class="col-span-6 truncate">
+                <div class="col-span-6">
                     {{ $user->agama }}
                 </div>
             </div>

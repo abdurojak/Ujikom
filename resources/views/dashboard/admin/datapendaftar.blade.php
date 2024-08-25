@@ -60,7 +60,10 @@
             buttons: [{
                 extend: 'excelHtml5',
                 text: 'Export Excel',
-                className: 'bg-green-500 text-white rounded px-4 py-2 mb-5' // Menggunakan kelas Tailwind
+                className: 'bg-green-500 text-white rounded px-4 py-2 mb-5', // Menggunakan kelas Tailwind
+                exportOptions: {
+                    columns: ':not(:last-child)' // Mengecualikan kolom terakhir (misalnya kolom "action")
+                }
             }],
             initComplete: function(settings, json) {
                 $('.dataTables_filter input').addClass(
